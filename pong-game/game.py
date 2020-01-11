@@ -33,6 +33,8 @@ ball.shape("square")
 ball.color("mediumseagreen")
 ball.penup()
 ball.goto(0, 0)
+ball.dx = 1
+ball.dy = 1
 
 #ft
 #up
@@ -49,15 +51,15 @@ def player_1_d():
 
 #up2
 def player_2_u():
-    y = player_1.ycor()
+    y = player_2.ycor()
     y += 20
-    player_1.sety(y)
+    player_2.sety(y)
 
 #down2
 def player_2_d():
-    y = player_1.ycor()
+    y = player_2.ycor()
     y -= 20
-    player_1.sety(y)
+    player_2.sety(y)
 
 
 #Kinput
@@ -73,5 +75,27 @@ window.onkeypress(player_2_u, "i")
 
 window.listen()
 window.onkeypress(player_2_d, "k")
+
+
 while True:
     window.update()
+    #ball mv
+    ball.setx(ball.xcor() + ball.dx)
+    ball.sety(ball.ycor() + ball.dy)
+
+    #crash
+    if ball.ycor() > 247:
+        ball.sety(247)
+        ball.dy *= -1
+
+    if ball.ycor() < -247:
+        ball.sety(-247)
+        ball.dy *= -1
+
+    if ball.xcor() > 247:
+        ball.goto(0, 0)
+        ball.dx *= -1
+
+    if ball.xcor() < -247:
+        ball.goto(0, 0)
+        ball.dx *= -1
